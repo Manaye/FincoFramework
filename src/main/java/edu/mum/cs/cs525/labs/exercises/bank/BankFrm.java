@@ -203,7 +203,7 @@ public class BankFrm extends javax.swing.JFrame
 		 set the boundaries and show it 
 		*/
 		
-		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe,accountService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -232,7 +232,7 @@ public class BankFrm extends javax.swing.JFrame
 		 show it 
 		*/
 		
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe,accountService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 		
