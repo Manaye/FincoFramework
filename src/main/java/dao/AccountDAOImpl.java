@@ -9,7 +9,7 @@ import dao.AccountDAO;
 
 public class AccountDAOImpl implements AccountDAO {
 	
-	public Collection<Account> accountlist = new ArrayList<Account>();
+	public static Collection<Account> accountlist = new ArrayList<Account>();
 
 	public void saveAccount(Account account) {
 		accountlist.add(account); // add the new

@@ -247,19 +247,17 @@ public class BankFrm extends javax.swing.JFrame {
 		}
 
 	}
-
-	void loadData() {
+	void loader () {
 		model.setRowCount(0);
-		for (Account account : accountService.getAllAccounts()) {
+		for(Account account : accountService.getAllAccounts()) {
 			rowdata[0] = account.getAccountNumber();
 			rowdata[1] = account.getCustomer().getName();
 			rowdata[2] = account.getCustomer().getAddress().getCity();
-			rowdata[3] = account.getAccountClass()==AccountClass.COMPANY?"C":"P";
+			rowdata[3] = account.getAccountClass() == AccountClass.COMPANY?"C" : "P";
 			rowdata[4] = account.getAccountType();
 			rowdata[5] = account.getBalance();
 			model.addRow(rowdata);
-		}​​​​​​​
-		
+		}
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event) {
@@ -326,7 +324,7 @@ public class BankFrm extends javax.swing.JFrame {
                 accountService.addInterest(account.getAccountNumber());
             }
         }
-        loadData();
+        loader();
 
 	}
 }
