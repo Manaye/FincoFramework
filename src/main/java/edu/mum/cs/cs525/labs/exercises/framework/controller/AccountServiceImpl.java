@@ -12,13 +12,15 @@ import java.util.Observer;
 
 public class AccountServiceImpl implements AccountService {
 	private AccountDAO accountDAO;
-	private Observer emailSender = new EmailSender();
-	private Observer[] arrayAccountChangeObservers;
+	private Observable observable;
+	//private Observer emailSender = new EmailSender();
+	//private Observer[] arrayAccountChangeObservers;
 	
-	public AccountServiceImpl(){
+	public AccountServiceImpl(Observable observable){
 		accountDAO = new AccountDAOImpl();
+		this.observable = observable;
 
-		arrayAccountChangeObservers = new Observer[]{new SMSSender(), new Logger()};
+		//arrayAccountChangeObservers = new Observer[]{new SMSSender(), new Logger()};
 	}
 
 	public Account createAccount(String accountNumber, String customerName) {
