@@ -19,6 +19,9 @@ public class BankFrm extends javax.swing.JFrame
     private JScrollPane JScrollPane1;
     BankFrm myframe;
     private Object rowdata[];
+    Observable subject = new Subject();
+    Observer emailSender = new EmailSender(subject);
+    AccountService accountService = new AccountServiceImpl(subject);
     
 	public BankFrm()
 	{
