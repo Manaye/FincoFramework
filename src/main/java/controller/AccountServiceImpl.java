@@ -1,5 +1,8 @@
 package controller;
 
+
+import dao.AccountDAO;
+import dao.AccountDAOImpl;
 import model.*;
 import observers.EmailSender;
 import observers.Logger;
@@ -8,9 +11,6 @@ import observers.SMSSender;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Observer;
-
-import dao.AccountDAO;
-import dao.AccountDAOImpl;
 
 public class AccountServiceImpl implements AccountService {
 	private AccountDAO accountDAO;
@@ -23,7 +23,11 @@ public class AccountServiceImpl implements AccountService {
 		arrayAccountChangeObservers = new Observer[]{new SMSSender(), new Logger()};
 	}
 
-	public Account createAccount(String accountNumber, String customerName, String email, String street, String city, String state, String zip, String creditCardNumber, LocalDate expiredDate, CreditCardType accountType) {
+
+	public Account createAccount(String accountNumber, String customerName,
+								 String email, String street, String city,
+								 String state, String zip, String creditCardNumber,
+								 LocalDate expiredDate, CreditCardType accountType) {
 		Account account;
 		switch (accountType) {
 			case GOLD: account = new GoldCreditCard(accountNumber,creditCardNumber, expiredDate);
