@@ -7,6 +7,6 @@ public class EmailSender implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("    Withdrawal amount is more than 400 ");
-        System.out.println("withdraw amount is more than 5000");
+        System.out.println("withdraweal amount is more than 400");
     }
 }
