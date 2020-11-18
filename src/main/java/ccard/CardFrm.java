@@ -1,6 +1,7 @@
 package ccard;
 
 import java.awt.BorderLayout;
+
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
@@ -11,10 +12,12 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.AccountService;
 import controller.AccountServiceImpl;
+import dao.AccountDAO;
 import dao.AccountDAOImpl;
 import dao.AccountDB;
 import model.Account;
 import model.AccountClass;
+import model.CreditCard;
 import model.CreditCardType;
 
 /**
@@ -101,6 +104,20 @@ public class CardFrm extends javax.swing.JFrame
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
 		
+	}
+	void loader() {
+		for(Account account : AccountDAOImpl.accountlist) {
+			if (account instanceof CreditCard) {
+				CreditCard creditcard = (CreditCard) account;
+				rowdata[0] = creditcard.getCustomer().getName();
+				rowdata[1] = creditcard.getAccountNumber();
+				rowdata[2] = creditcard.getExpireDate();
+				rowdata[3] = account.getAccountClass() == AccountClass.COMPANY? "C" : "P";
+				rowdata[4] = account.getBalance();
+				model.addRow(rowdata);
+			}
+			
+		}
 	}
 
 	
@@ -221,19 +238,13 @@ public class CardFrm extends javax.swing.JFrame
             rowdata[4] = "0";
             model.addRow(rowdata);
             LocalDate localDate = LocalDate.parse(expdate);
-            
-            
-//            public Account createCreditAccount(String accountNumber, String customerName, String email, String street, String city,
-//        			String state, String zip, String creditCardNumber, LocalDate expiredDate,  CreditCardType accountType,  AccountClass accountclass) {
+                       
             accountService.createCreditAccount(ccnumber, clientName, email, street, city, state,
-            		zip, ccnumber, localDate, creditCardType, AccountClass.CREDITCARD);
+            		zip, ccnumber, localDate, creditCardType.GOLD, AccountClass.CREDITCARD);
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
             
-            for(Account account : AccountDB.accountlist) {
-            	System.out.println(account.getAccountNumber());
-            	
-            }
+           
         }
    
     }
