@@ -11,12 +11,10 @@ public class Application {
 		AccountService accountService = new AccountServiceImpl();
 
 		// create 2 accounts;
-		accountService.createAccount("1263862", "Frank Brown","email1@gmail.com",
-				"1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.GOLD);
-		accountService.createAccount("4253892", "John Doe", "email2@gmail.com", "1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.SILVER);
-//		accountService.createAccount("4253892", "John Doe", CreditCardType.GOLD);
+		accountService.createCreditAccount("1263862", "Frank Brown","email1@gmail.com",
+				"1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.GOLD, AccountClass.CREDITCARD);
+		accountService.createCreditAccount("4253892", "John Doe", "email2@gmail.com", "1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.SILVER, AccountClass.CREDITCARD);
 
-		// use account 1;
 		accountService.deposit("1263862", 240);
 		accountService.deposit("1263862", 529);
 //		accountService.withdraw("1263862", 230);
@@ -26,7 +24,7 @@ public class Application {
 		accountService.deposit("4253892", 12450);
 
 		// add interest to all accounts
-		accountService.addInterest();
+		accountService.addInterest("hhh");
 
 		// show balances
 		for (Account account : accountService.getAllAccounts()) {

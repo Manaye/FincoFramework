@@ -1,5 +1,6 @@
 package bank;
 
+import model.AccountType;
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
@@ -139,10 +140,12 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
        parentframe.city=JTextField_CT.getText();
        parentframe.zip=JTextField_ZIP.getText();
        parentframe.state=JTextField_ST.getText();
+       parentframe.email=JTextField_EM.getText();
+       parentframe.numEmployee=JTextField_NoOfEmp.getText();
        if (JRadioButton_Chk.isSelected())
-           parentframe.accountType="Ch";
+           parentframe.accountType=AccountType.CHECKING;
            else
-           parentframe.accountType="S";
+           parentframe.accountType=AccountType.SAVING;
 	   parentframe.newaccount=true;
 	   dispose();
 			 

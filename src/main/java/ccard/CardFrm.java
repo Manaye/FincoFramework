@@ -1,12 +1,21 @@
 package ccard;
 
 import java.awt.BorderLayout;
+import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+
+import controller.AccountService;
+import controller.AccountServiceImpl;
+import dao.AccountDAOImpl;
+import dao.AccountDB;
+import model.Account;
+import model.AccountClass;
+import model.CreditCardType;
 
 /**
  * A basic JFC based application.
@@ -16,13 +25,17 @@ public class CardFrm extends javax.swing.JFrame
     /****
      * init variables in the object
      ****/
-    String clientName,street,city, zip, state,accountType,amountDeposit,expdate, ccnumber;
+    String clientName,street,city, zip, state,accountType,amountDeposit, ccnumber, email;
+    String expdate;
     boolean newaccount;
+    CreditCardType creditCardType;
     private DefaultTableModel model;
     private JTable JTable1;
     private JScrollPane JScrollPane1;
     CardFrm thisframe;
     private Object rowdata[];
+    
+    AccountService accountService = new AccountServiceImpl(); 
     
 	public CardFrm()
 	{
@@ -207,12 +220,22 @@ public class CardFrm extends javax.swing.JFrame
             rowdata[3] = accountType;
             rowdata[4] = "0";
             model.addRow(rowdata);
+            LocalDate localDate = LocalDate.parse(expdate);
+            
+            
+//            public Account createCreditAccount(String accountNumber, String customerName, String email, String street, String city,
+//        			String state, String zip, String creditCardNumber, LocalDate expiredDate,  CreditCardType accountType,  AccountClass accountclass) {
+            accountService.createCreditAccount(ccnumber, clientName, email, street, city, state,
+            		zip, ccnumber, localDate, creditCardType, AccountClass.CREDITCARD);
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
+            
+            for(Account account : AccountDB.accountlist) {
+            	System.out.println(account.getAccountNumber());
+            	
+            }
         }
-
-       
-        
+   
     }
 
 	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
