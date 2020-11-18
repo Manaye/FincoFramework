@@ -1,11 +1,12 @@
 package edu.mum.cs.cs525.labs.exercises.framework.controller;
 import java.util.ArrayList;
 import java.util.List;
-
+java.util.Observable;
+java.util.Observer
 
 import edu.mum.cs.cs525.labs.exercises.framework.model.Subject;
 
-public class SubjectImpl implements Subject {
+public class SubjectImpl extends Observable {
 	List<Observer> listObservers = new ArrayList<>();
 
 	@Override
