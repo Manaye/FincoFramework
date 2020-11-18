@@ -8,7 +8,7 @@ public class EmailSender implements Observer {
     private Observable observable;
     EmailSender(Observable observable){
         this.observable = observable;
-        observable.register(this);
+        observable.addObserver(this);
     }
     @Override
     public void update(Observable o, Object arg) {
