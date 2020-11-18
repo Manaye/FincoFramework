@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.swing.JFrame; 
+import javax.swing.JScrollPane; 
+import javax.swing.JTable; 
+import javax.swing.table.DefaultTableModel;
+ 
+public class JDialog_ShowReport { 
+
+    JFrame frame; 
+    
+    private IAccountService accountService;
+    JDialog_AccountReport(IAccountService accountService) 
+    { 
+    
+    	this.accountService = accountService;
+        frame = new JFrame(); 
+  
+        frame.setTitle("Account Report"); 
+  
+        JTable account_Table = new JTable();
+        Collection<Account> accounts = new ArrayList<>();
+        accounts = accountService.getAllAccounts();
+        
+        Object[] columnNames = {"Acc Number", "Customer Name", "Description"};
+        DefaultTableModel model = new DefaultTableModel(new Object[0][0], columnNames);
+            
+              for(Account acc : accounts) {
+            	  model.addRow(new String[] {acc.getAccountnumber(),acc.getCustomer().getName(),"Pending"});
+              }
+             
+            
+        account_Table.setModel(model);
+     
+        account_Table.setBounds(30, 40, 200, 300); 
+  
+        JScrollPane sp = new JScrollPane(account_Table); 
+        frame.add(sp);  
+        frame.setSize(500, 200);  
+        frame.setVisible(true); 
+    } 
+}
+
+   
