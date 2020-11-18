@@ -48,9 +48,11 @@ public class Application {
 			}
 			
 			System.out.println("----------------------------------------" + "----------------------------------------");
-			System.out.printf("%30s%30s%20.2f\n\n", "", "Current Balance:", account.getBalance());
+			System.out.printf("%30s%30s%20.2f\n", "", "Current Balance:", account.getBalance());
 			System.out.printf("%30s%30s%20.2f\n\n", "", "Minimum Payment:", account.getMinimumPayment());
 		}
+
+		System.out.println(accountService.getBillingReport());
 	}
 
 }

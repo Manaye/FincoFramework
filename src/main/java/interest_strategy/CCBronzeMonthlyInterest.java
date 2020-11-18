@@ -1,14 +1,26 @@
 package interest_strategy;
 
 public class CCBronzeMonthlyInterest implements InterestService {
+    private double monthlyInterest = 0.01;
+    private double minimumPayInterest = 0.14;
+
     @Override
     public double calInterest(double balance) {
-        //TODO
-        return balance*0.01;
+        return balance*monthlyInterest;
     }
 
     @Override
     public double caclMinPayment(double balance) {
-        return balance*0.14;
+        return balance*minimumPayInterest;
+    }
+
+    @Override
+    public double getMinimumPayInterest() {
+        return minimumPayInterest;
+    }
+
+    @Override
+    public double getMonthlyInterest() {
+        return monthlyInterest;
     }
 }

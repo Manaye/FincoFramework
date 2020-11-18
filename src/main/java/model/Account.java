@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Observable;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.*;
 
 import interest_strategy.InterestService;
 
@@ -79,6 +79,14 @@ public class Account extends Observable {
 		return interestService.calInterest(balance);
 	}
 
+	public double getMonthlyInterest() {
+		return interestService.getMonthlyInterest();
+	}
+
+	public double getMinimumPayInterest() {
+		return interestService.getMinimumPayInterest();
+	}
+
 	public double getMinimumPayment() {
 		double balance = this.getBalance();
 
@@ -97,5 +105,71 @@ public class Account extends Observable {
 	public void notifyChanged() {
 		this.setChanged();
 		this.notifyObservers();
+	}
+
+	//Get total charge of an account in current month.
+	public double getTotalCharge() {
+		double result = 0.0;
+
+		Collection<AccountEntry> accountEntries = this.getEntryList();
+
+		result = accountEntries.stream()
+				.filter(accountEntry -> accountEntry.getDescription().equals("withdraw"))
+				.filter(accountEntry -> DateToLocalDate(accountEntry.getDate()).getMonthValue() == LocalDate.now().getMonthValue())
+				.filter(accountEntry -> Period.between(DateToLocalDate(accountEntry.getDate()), LocalDate.now()).getMonths()==0)
+				.map(accountEntry -> accountEntry.getAmount())
+				.reduce(0.0, (num1, num2) -> num1 + num2);
+
+		return result;
+	}
+
+	//Get total charge of an account in current month.
+	public double getTotalCredit() {
+		double result = 0.0;
+
+		Collection<AccountEntry> accountEntries = this.getEntryList();
+
+		result = accountEntries.stream()
+				.filter(accountEntry -> accountEntry.getDescription().equals("deposit"))
+				.filter(accountEntry -> DateToLocalDate(accountEntry.getDate()).getMonthValue() == LocalDate.now().getMonthValue())
+				.filter(accountEntry -> Period.between(DateToLocalDate(accountEntry.getDate()), LocalDate.now()).getMonths()==0)
+				.map(accountEntry -> accountEntry.getAmount())
+				.reduce(0.0, (num1, num2) -> num1 + num2);
+
+//		for (AccountEntry accountEntry: accountEntries
+//			 ) {
+//			System.out.println(accountEntry.getDescription().equals("deposit"));
+//			System.out.println(DateToLocalDate(accountEntry.getDate()).getMonthValue());
+//			System.out.println(Period.between(DateToLocalDate(accountEntry.getDate()), LocalDate.now()).getMonths());
+//		}
+		return result;
+	}
+
+	//Get total charge of an account in current month.
+	public double getPreviousBalance() {
+		double result = 0.0;
+
+		Collection<AccountEntry> accountEntries = this.getEntryList();
+
+		result = accountEntries.stream()
+				.filter(accountEntry -> DateToLocalDate(accountEntry.getDate()).getMonthValue() == LocalDate.now().getMonthValue())
+				.filter(accountEntry -> Period.between(DateToLocalDate(accountEntry.getDate()), LocalDate.now()).getMonths()==1)
+				.map(accountEntry -> accountEntry.getAmount())
+				.reduce(0.0, (num1, num2) -> num1 + num2);
+
+		return result;
+	}
+
+	public LocalDate DateToLocalDate(Date date) {
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	}
+
+	//Should be override
+	public String getCCNumber() {
+		return null;
+	}
+
+	public String billingReport() {
+		return null;
 	}
 }

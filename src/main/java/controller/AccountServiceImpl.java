@@ -9,7 +9,10 @@ import observers.Logger;
 import observers.SMSSender;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Observer;
 
 public class AccountServiceImpl implements AccountService {
@@ -87,7 +90,24 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 
-	public void getBillingReport() {
+	public String getBillingReport() {
 		//TODO
+		String billstring = "";
+
+		for (Account account : getAllAccounts()) {
+			billstring += "Name= John White\r\n";
+			billstring += "Address= 1000 Main, Fairfield, IA, 52556\r\n";
+			billstring += "CC number= 2341 3421 4444 5689\r\n";
+			billstring += "CC type= GOLD\r\n";
+			billstring += "Previous balance = $ " + account.getPreviousBalance() + "\r\n";
+			billstring += "Total Credits = $ " + account.getTotalCredit() + "\r\n";
+			billstring += "Total Charges = $ " + account.getTotalCharge() + "\r\n";
+			billstring += "New balance = $ " + account.getBalance() + "\r\n";
+			billstring += "Total amount due = $" + account.getMinimumPayment() + "\r\n\r\n";
+		}
+
+		return billstring;
+
+//		BillingReport billingReport = new BillingReport();
 	}
 }
