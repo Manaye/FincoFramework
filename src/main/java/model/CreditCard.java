@@ -6,8 +6,8 @@ public class CreditCard extends Account {
     private String creditCardNumber;
     private LocalDate expireDate;
 
-    public CreditCard(String accountNumber, String creditCardNumber, LocalDate expireDate) {
-        super(accountNumber);
+    public CreditCard(String accountNumber, String creditCardNumber, LocalDate expireDate, AccountClass accountClass) {
+        super(accountNumber, accountClass);
         this.creditCardNumber = creditCardNumber;
         this.expireDate = expireDate;
     }

@@ -7,17 +7,32 @@ import java.util.Observable;
 
 import interest_strategy.InterestService;
 
+
 public class Account extends Observable {
+	
 	private Customer customer;
-
 	private String accountNumber;
-
 	private List<AccountEntry> entryList = new ArrayList<AccountEntry>();
-
-	public Account(String accountNumber) {
-		this.accountNumber = accountNumber;
+	private AccountClass accountClass;
+	private AccountType accountType;
+	private InterestService interestService;
+	
+	
+	//bank account contractor
+	public Account(String accountNumber, AccountType accountType, AccountClass accountClass) {
+	    this.accountNumber = accountNumber;
+	    this.accountType = accountType;
+	    this.accountClass = accountClass;
+	   
 	}
-
+	//credit card contractor
+	public Account(String accountNumber, AccountClass accountClass) {
+		this.accountNumber = accountNumber;
+		this.accountClass = accountClass;
+	}
+	public Account() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -25,8 +40,18 @@ public class Account extends Observable {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+	
+	public AccountClass getAccountClass() {
+		return accountClass;
+	}
 
-	private InterestService interestService;
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public InterestService getInterestService() {
+		return interestService;
+	}
 
 	public double getBalance() {
 		double balance = 0;
