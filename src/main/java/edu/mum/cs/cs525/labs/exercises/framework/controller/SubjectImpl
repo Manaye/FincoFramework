@@ -1,0 +1,31 @@
+package edu.mum.cs.cs525.labs.exercises.framework.controller;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import edu.mum.cs.cs525.labs.exercises.framework.model.Subject;
+
+public class SubjectImpl implements Subject {
+	List<Observer> listObservers = new ArrayList<>();
+
+	@Override
+	public void register(Observer observer) {
+		listObservers.add(observer);
+
+	}
+
+	@Override
+	public void remove(Observer observer) {
+		listObservers.remove(observer);
+
+	}
+
+	@Override
+	public void notifyObservers(Account account) {
+		for (Observer obj : listObservers) {
+			obj.update(account);
+		}
+
+	}
+
+}
