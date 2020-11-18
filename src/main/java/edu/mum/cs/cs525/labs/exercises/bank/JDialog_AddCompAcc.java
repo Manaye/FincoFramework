@@ -152,7 +152,7 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
            else
            parentframe.accountType="S";
 	   parentframe.newaccount=true;
-	   accountService.createCompanyAccount(accNum,clientName,street,city,zips,tate);
+	   accountService.createCompanyAccount(accNum,clientName,street,city,zip,tate);
 	   dispose();
 			 
 	}
