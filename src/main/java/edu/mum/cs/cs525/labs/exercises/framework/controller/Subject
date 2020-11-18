@@ -6,7 +6,7 @@ java.util.Observer
 
 import edu.mum.cs.cs525.labs.exercises.framework.model.Subject;
 
-public class SubjectImpl extends Observable {
+public class Subject extends Observable {
 	List<Observer> listObservers = new ArrayList<>();
 
 	@Override
