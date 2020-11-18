@@ -1,4 +1,7 @@
 package bank;
+
+import model.AccountType;
+
 /*
 		A basic implementation of the JDialog class.
 */
@@ -175,10 +178,12 @@ public class JDialog_AddPAcc extends javax.swing.JDialog
        parentframe.city=JTextField_CT.getText();
        parentframe.zip=JTextField_ZIP.getText();
        parentframe.state=JTextField_ST.getText();
+       parentframe.dateOfBirth=JTextField_BD.getText();
+       parentframe.email=JTextField_EM.getText();
        if (JRadioButton_Chk.isSelected())
-           parentframe.accountType="Ch";
+           parentframe.accountType= AccountType.CHECKING;
            else
-           parentframe.accountType="S";
+           parentframe.accountType=AccountType.SAVING;
 	   parentframe.newaccount=true;
        dispose();
 	}
