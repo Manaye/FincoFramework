@@ -9,8 +9,8 @@ public class Application {
 		AccountService accountService = new AccountServiceImpl();
 
 		// create 2 accounts;
-		accountService.createAccount("1263862", "Frank Brown", CreditCardType.GOLD);
-		accountService.createAccount("4253892", "John Doe", CreditCardType.SILVER);
+		accountService.createAccount("1263862", "Frank Brown","email1@gmail.com", "1004 N 4th St", "Fairfield", "IA", "52557",   CreditCardType.GOLD);
+		accountService.createAccount("4253892", "John Doe", "email2@gmail.com", "1004 N 4th St", "Fairfield", "IA", "52557", CreditCardType.SILVER);
 //		accountService.createAccount("4253892", "John Doe", CreditCardType.GOLD);
 
 		// use account 1;

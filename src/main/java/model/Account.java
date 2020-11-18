@@ -36,8 +36,6 @@ public class Account extends Observable {
 		return balance;
 	}
 
-
-
 	public void deposit(double amount) {
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
 		entryList.add(entry);

@@ -1,13 +1,13 @@
-package controller;
+package edu.mum.cs.cs525.labs.exercises.framework.controller;
+
+import edu.mum.cs.cs525.labs.exercises.framework.model.CreditCardType;
+import edu.mum.cs.cs525.labs.exercises.framework.model.Account;
 
 import java.util.Collection;
 
-import model.Account;
-import model.CreditCardType;
-
 public interface AccountService {
-    Account createAccount(String accountNumber, String customerName, CreditCardType accountType);
-//    Account createAccount(String accountNumber, String customerName, CreditCardType creditCardType);
+
+    Account createAccount(String accountNumber, String customerName, String email, String street, String city, String state, String zip, String creditCardNumber, LocalDate expiredDate, CreditCardType accountType);
     Account getAccount(String accountNumber);
     Collection<Account> getAllAccounts();
     void deposit (String accountNumber, double amount);
