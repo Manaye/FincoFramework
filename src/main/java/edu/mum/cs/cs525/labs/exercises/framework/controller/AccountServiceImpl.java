@@ -51,18 +51,18 @@ public class AccountServiceImpl implements AccountService {
 		account.setCustomer(customer);
 
 		//Add Email observer
-		account.addObserver(emailSender);
+		//account.addObserver(emailSender);
 
 		accountDAO.saveAccount(account);
 		return account;
 	}
 
-	private void addObservers(Account account, Observer arrayObs[]) {
+	/*private void addObservers(Account account, Observer arrayObs[]) {
 		if(arrayObs == null) return;
 		for (Observer obs : arrayObs) {
 			account.addObserver(obs);
 		}
-	}
+	}*/
 
 	public void deposit(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
