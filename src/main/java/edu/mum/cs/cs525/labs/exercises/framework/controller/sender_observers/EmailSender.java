@@ -4,8 +4,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class EmailSender implements Observer {
+    
+    private Observable observable;
+    EmailSender(Observable observable){
+        this.observable = observable;
+        observable.register(this);
+    }
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("    Withdrawal amount is more than 400 ");
+        SYstem.out.println();
     }
 }
