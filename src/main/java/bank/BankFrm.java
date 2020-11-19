@@ -248,7 +248,7 @@ public class BankFrm extends javax.swing.JFrame {
 
 	}
 
-	void loadData() {
+	void loader() {
 		model.setRowCount(0);
 		for (Account account : accountService.getAllAccounts()) {
 			rowdata[0] = account.getAccountNumber();
@@ -260,7 +260,6 @@ public class BankFrm extends javax.swing.JFrame {
 			model.addRow(rowdata);
 		}
 	}
-	
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event) {
 		// get selected name
@@ -320,16 +319,19 @@ public class BankFrm extends javax.swing.JFrame {
 		JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts",
 				"Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
 
+		
+		
 		for (Account account : AccountDB.accountlist) {
-			System.out.println(account.getAccountNumber() + " " + account.getAccountClass());
-		}
-		for (Account account : AccountDB.accountlist) {
-			if (account.getAccountClass() == AccountClass.COMPANY
-					|| account.getAccountClass() == AccountClass.PERSONAL) {
+			if (account.getAccountClass() == AccountClass.COMPANY || account.getAccountClass() == AccountClass.PERSONAL) {
 				accountService.addInterest(account.getAccountNumber());
 			}
+			
+			System.out.println(account.getAccountNumber() + " " + account.getAccountClass());
 		}
-		loadData();
+		
+          loader();  
+        }
+	
+		
 
-	}
 }
