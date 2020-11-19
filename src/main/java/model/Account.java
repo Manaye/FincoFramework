@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 import interest_strategy.InterestService;
+import interest_strategy.InterestStrategy;
 
 
 public class Account extends Observable {
@@ -16,6 +17,7 @@ public class Account extends Observable {
 	private AccountClass accountClass;
 	private AccountType accountType;
 	private InterestService interestService;
+	private InterestStrategy interestStrategy;
 	
 	
 	//bank account contractor
@@ -53,6 +55,10 @@ public class Account extends Observable {
 		return interestService;
 	}
 
+	public InterestStrategy getInterestStrategy() {
+		return interestStrategy;
+	}
+
 	public double getBalance() {
 		double balance = 0;
 		for (AccountEntry entry : entryList) {
@@ -62,6 +68,7 @@ public class Account extends Observable {
 	}
 
 	public void deposit(double amount) {
+		System.out.println("amount" + amount);
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
 		entryList.add(entry);
 
@@ -83,16 +90,7 @@ public class Account extends Observable {
 		entryList.add(entry);
 	}
 
-	public void transferFunds(Account toAccount, double amount, String description) {
-		AccountEntry fromEntry = new AccountEntry(-amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		AccountEntry toEntry = new AccountEntry(amount, description, toAccount.getAccountNumber(),
-				toAccount.getCustomer().getName());
-		
-		entryList.add(fromEntry);
-		
-		toAccount.addEntry(toEntry);
-	}
+
 
 	public Customer getCustomer() {
 		return customer;
@@ -108,8 +106,15 @@ public class Account extends Observable {
 
 	public double performInterest() {
 		double balance = this.getBalance();
+		double tempBalance = 0;
 
-		return interestService.calInterest(balance);
+		if(this.getAccountType().equals(AccountType.CHECKING) ||
+				this.getAccountType().equals(AccountType.SAVING)) {
+		   tempBalance = interestStrategy.calInterest(balance);
+		}else {
+			tempBalance = interestService.calInterest(balance);
+		}
+		return tempBalance;
 	}
 
 	public double getMonthlyInterest() {
@@ -129,6 +134,10 @@ public class Account extends Observable {
 	public void setInterestService(InterestService interestService) {
 		this.interestService = interestService;
 	}
+	public void setInterestStrategy(InterestStrategy interestStrategy) {
+		this.interestStrategy = interestStrategy;
+	}
+
 
 	public void addInterest() {
 		AccountEntry entry = new AccountEntry(this.performInterest(), "interest", "", "");

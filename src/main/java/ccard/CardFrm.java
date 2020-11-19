@@ -38,7 +38,7 @@ public class CardFrm extends javax.swing.JFrame
     CardFrm thisframe;
     private Object rowdata[];
     
-    AccountService accountService = new AccountServiceImpl(); 
+    AccountService accountService = AccountServiceImpl.getInstance(); 
     
 	public CardFrm()
 	{

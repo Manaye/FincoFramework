@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class Application {
 	public static void main(String[] args) {
-		AccountService accountService = new AccountServiceImpl();
+		AccountService accountService = AccountServiceImpl.getInstance();
 
 		// create 2 accounts;
 		accountService.createCreditAccount("1263862", "Frank Brown","email1@gmail.com",

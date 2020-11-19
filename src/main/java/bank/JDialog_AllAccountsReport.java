@@ -40,6 +40,13 @@ public class JDialog_AllAccountsReport {
             			  acc.getCustomer().getName(),
             	          acc.getAccountType().toString(),
             	          String.valueOf(acc.getBalance())});
+            	     System.out.println("Testxxx:" + acc.getBalance());
+            	    for(AccountEntry entry : acc.getEntryList()) {
+            	    	model.addRow(new String[] {
+            	    			entry.getDescription(),
+            	    			String.valueOf(entry.getAmount())});
+            	    			
+            	    }
             	    
               }
               

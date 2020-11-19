@@ -3,6 +3,10 @@ package controller;
 
 import dao.AccountDAO;
 import dao.AccountDAOImpl;
+import interest_strategy.CheckingInterest;
+import interest_strategy.InterestService;
+import interest_strategy.InterestStrategy;
+import interest_strategy.SavingInterest;
 import model.*;
 import observers.EmailSender;
 import observers.Logger;
@@ -16,19 +20,18 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDAO accountDAO;
 	private Observer emailSender = new EmailSender();
 	private Observer[] arrayAccountChangeObservers;
+	 InterestStrategy checkingInterest = new CheckingInterest();
+	 InterestStrategy savingInterest = new SavingInterest();
 
-    private static AccountServiceImpl instance;
+    private static AccountServiceImpl instance = new AccountServiceImpl();
 
-
-	public static AccountServiceImpl getInstance() {
-		if(instance == null) instance = new AccountServiceImpl();
-		return instance;
-	}
-
-	public AccountServiceImpl() {
+	private AccountServiceImpl() {
 		accountDAO = new AccountDAOImpl();
 
 		arrayAccountChangeObservers = new Observer[] { new SMSSender(), new Logger() };
+	}
+	public static AccountService getInstance() {
+		return instance;
 	}
 
 	public Account createCreditAccount(String accountNumber, String customerName, String email, String street, String city,
@@ -64,6 +67,11 @@ public class AccountServiceImpl implements AccountService {
 		Address address = new Address(street, city, state, zip);
 		Customer customer = new Customer(name, email, address);
 
+		if(accountType.equals(AccountType.CHECKING)) {
+			account.setInterestStrategy(checkingInterest);
+		}else if(accountType.equals(AccountType.SAVING)) {
+			account.setInterestStrategy(savingInterest);
+		}
 		account.setCustomer(customer);
 		accountDAO.saveAccount(account);
 		account.addObserver(emailSender);
@@ -78,6 +86,11 @@ public class AccountServiceImpl implements AccountService {
 		Address address = new Address(street, city, state, zip);
 		Customer customer = new Customer(name, email, address);
 
+		if(accountType.equals(AccountType.CHECKING)) {
+			account.setInterestStrategy(checkingInterest);
+		}else if(accountType.equals(AccountType.SAVING)) {
+			account.setInterestStrategy(savingInterest);
+		}
 		account.setCustomer(customer);
 		accountDAO.saveAccount(account);
 		account.addObserver(emailSender);

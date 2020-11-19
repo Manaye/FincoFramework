@@ -30,7 +30,7 @@ public class BankFrm extends javax.swing.JFrame {
 	private JScrollPane JScrollPane1;
 	BankFrm myframe;
 	private Object rowdata[];
-	AccountService accountService = new AccountServiceImpl();
+	AccountService accountService = AccountServiceImpl.getInstance();
 	AccountType accountType;
 
 	public BankFrm() {
@@ -85,6 +85,9 @@ public class BankFrm extends javax.swing.JFrame {
 		JButton_Exit.setText("Exit");
 		JPanel1.add(JButton_Exit);
 		JButton_Exit.setBounds(468, 248, 96, 31);
+		JButton_Report.setText("Report");
+		JPanel1.add(JButton_Report);
+		JButton_Report.setBounds(468,200,96,30);
 		// lineBorder1.setRoundedCorners(true);
 		// lineBorder1.setLineColor(java.awt.Color.green);
 		// $$ lineBorder1.move(24,312);
@@ -100,6 +103,7 @@ public class BankFrm extends javax.swing.JFrame {
 		JButton_Deposit.addActionListener(lSymAction);
 		JButton_Withdraw.addActionListener(lSymAction);
 		JButton_Addinterest.addActionListener(lSymAction);
+		JButton_Report.addActionListener(lSymAction);
 
 	}
 
@@ -132,6 +136,7 @@ public class BankFrm extends javax.swing.JFrame {
 	javax.swing.JButton JButton_Deposit = new javax.swing.JButton();
 	javax.swing.JButton JButton_Withdraw = new javax.swing.JButton();
 	javax.swing.JButton JButton_Addinterest = new javax.swing.JButton();
+	javax.swing.JButton JButton_Report= new javax.swing.JButton();
 	javax.swing.JButton JButton_Exit = new javax.swing.JButton();
 
 	void exitApplication() {
@@ -179,6 +184,8 @@ public class BankFrm extends javax.swing.JFrame {
 				JButtonWithdraw_actionPerformed(event);
 			else if (object == JButton_Addinterest)
 				JButtonAddinterest_actionPerformed(event);
+			else if (object == JButton_Report)
+				JButtonReport_actionPerformed(event);
 
 		}
 	}
@@ -195,7 +202,7 @@ public class BankFrm extends javax.swing.JFrame {
 		 * JDialog_AddPAcc type object set the boundaries and show it
 		 */
 
-		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe,accountService);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 
@@ -239,11 +246,9 @@ public class BankFrm extends javax.swing.JFrame {
 			model.addRow(rowdata);
 			JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
 
-			int noEmployee = Integer.parseInt(numEmployee);
-
-			accountService.createCompanyAccount(accountnr, clientName, accountType, street, city, state, zip, email,
-					noEmployee, AccountClass.COMPANY);
 			newaccount = false;
+			
+			
 		}
 
 	}
@@ -260,10 +265,31 @@ public class BankFrm extends javax.swing.JFrame {
 			model.addRow(rowdata);
 		}
 	}
+	void JButtonReport_actionPerformed(java.awt.event.ActionEvent event) {
+	       new JDialog_AllAccountsReport(accountService);
+			
+	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event) {
-		// get selected name
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+        if (selection >=0){
+            String accnr = (String)model.getValueAt(selection, 0);
+    	    
+		    //Show the dialog for adding deposit amount for the current mane
+		    JDialog_Deposit dep = new JDialog_Deposit(myframe,accnr);
+		    dep.setBounds(430, 15, 275, 140);
+		    dep.show();
+    		
+		    // compute new amount
+            long deposit = Long.parseLong(amountDeposit);
+            String samount = (String)model.getValueAt(selection, 5);
+            double currentamount = Long.parseLong(samount);
+		    double  newamount=currentamount+deposit;
+		    model.setValueAt(String.valueOf(newamount),selection, 5);
+		    
+        }
+		// get selected name
+		/*int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 		if (selection >= 0) {
 			String accnr = (String) model.getValueAt(selection, 0);
 
@@ -279,11 +305,11 @@ public class BankFrm extends javax.swing.JFrame {
 			long newamount = currentamount + deposit;
 			// model.setValueAt(String.valueOf((accountService.getAccount(accnr).getBalance())),
 			// selection, 5);
-			model.setValueAt(String.valueOf(newamount), selection, 5);
+			model.setValueAt(String.valueOf(newamount), selection, 5); */
 
 		}
 
-	}
+	
 
 	void JButtonWithdraw_actionPerformed(java.awt.event.ActionEvent event) {
 		// get selected name
@@ -292,7 +318,7 @@ public class BankFrm extends javax.swing.JFrame {
 			String accnr = (String) model.getValueAt(selection, 0);
 
 			// Show the dialog for adding withdraw amount for the current mane
-			JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr);
+			JDialog_Withdraw wd = new JDialog_Withdraw(myframe, accnr,accountService);
 			wd.setBounds(430, 15, 275, 140);
 			wd.show();
 
@@ -316,12 +342,14 @@ public class BankFrm extends javax.swing.JFrame {
 	}
 
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event) {
-		JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts",
-				"Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
+		
 
+		accountService.addInterest();
+		JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
+	}
 		
 		
-		for (Account account : AccountDB.accountlist) {
+	/*	for (Account account : AccountDB.accountlist) {
 			if (account.getAccountClass() == AccountClass.COMPANY || account.getAccountClass() == AccountClass.PERSONAL) {
 				accountService.addInterest(account.getAccountNumber());
 			}
@@ -329,9 +357,9 @@ public class BankFrm extends javax.swing.JFrame {
 			System.out.println(account.getAccountNumber() + " " + account.getAccountClass());
 		}
 		
-          loader();  
-        }
+          loader();  */
+    }
 	
 		
 
-}
+
