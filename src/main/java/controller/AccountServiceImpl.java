@@ -92,13 +92,6 @@ public class AccountServiceImpl implements AccountService {
 		}
 	}
 
-	public void deposit(String accountNumber, double amount) {
-		Account account = accountDAO.loadAccount(accountNumber);
-		account.deposit(amount);
-
-		accountDAO.updateAccount(account);
-	}
-
 	public Account getAccount(String accountNumber) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		return account;
@@ -108,14 +101,23 @@ public class AccountServiceImpl implements AccountService {
 		return accountDAO.getAccounts();
 	}
 
+	public void deposit(String accountNumber, double amount) {
+		Account account = accountDAO.loadAccount(accountNumber);
+		account.deposit(amount);
+
+		accountDAO.updateAccount(account);
+	}
+
 	public void withdraw(String accountNumber, double amount) {
 		Account account = accountDAO.loadAccount(accountNumber);
 		account.withdraw(amount);
-		accountDAO.updateAccount(account);
 
-		if (amount>400) {
-			account.notifyChanged();
-		}
+		accountDAO.updateAccount(account);
+	}
+
+	@Override
+	public void addInterest(String accountNumber) {
+
 	}
 
 	public void addInterest() {
