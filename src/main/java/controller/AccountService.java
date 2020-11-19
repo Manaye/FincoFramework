@@ -27,9 +27,7 @@ public interface AccountService {
 
 	void withdraw(String accountNumber, double amount);
 
-	// void transferFunds(String fromAccountNumber, String toAccountNumber, double
-	// amount, String description);
 	void addInterest(String accountNumber);
 
-	void getBillingReport(); // TODO
+	String getBillingReport(); // TODO
 }
