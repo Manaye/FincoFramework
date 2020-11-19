@@ -64,11 +64,19 @@ public class Account extends Observable {
 	public void deposit(double amount) {
 		AccountEntry entry = new AccountEntry(amount, "deposit", "", "");
 		entryList.add(entry);
+
+		if(amount > 400) {
+			this.notifyChanged(entry);
+		}
 	}
 
 	public void withdraw(double amount) {
 		AccountEntry entry = new AccountEntry(-amount, "withdraw", "", "");
 		entryList.add(entry);
+
+		if(amount > 400) {
+			this.notifyChanged(entry);
+		}
 	}
 
 	private void addEntry(AccountEntry entry) {
@@ -127,9 +135,9 @@ public class Account extends Observable {
 		entryList.add(entry);
 	}
 
-	public void notifyChanged() {
+	public void notifyChanged(AccountEntry entry) {
 		this.setChanged();
-		this.notifyObservers();
+		this.notifyObservers(entry);
 	}
 
 	//Get total charge of an account in current month.
