@@ -11,9 +11,9 @@ public class Application {
 		AccountService accountService = AccountServiceImpl.getInstance();
 
 		// create 2 accounts;
-		accountService.createCreditAccount("1263862", "Frank Brown","email1@gmail.com",
+		accountService.createCreditAccount("1263862", "Frank Brown","nvhbao@yopmail.com",
 				"1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.GOLD, AccountClass.CREDITCARD);
-		accountService.createCreditAccount("4253892", "John Doe", "email2@gmail.com", "1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.SILVER, AccountClass.CREDITCARD);
+		accountService.createCreditAccount("4253892", "John Doe", "nvhbao@yopmail.com", "1004 N 4th St", "Fairfield", "IA", "52557", "123456789", LocalDate.now(), CreditCardType.SILVER, AccountClass.CREDITCARD);
 
 		accountService.deposit("1263862", 240);
 		accountService.deposit("1263862", 529);
