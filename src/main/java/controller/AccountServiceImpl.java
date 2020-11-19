@@ -57,6 +57,34 @@ public class AccountServiceImpl implements AccountService {
 		return account;
 	}
 
+	public Account createPersonalAccount(String accountNumber, String name, AccountType accountType, String street,
+										 String city, String state, String zip, String email, LocalDate birthdate, AccountClass accountclass) {
+
+		Account account = new Account(accountNumber, accountType, AccountClass.PERSONAL);
+		Address address = new Address(street, city, state, zip);
+		Customer customer = new Customer(name, email, address);
+
+		account.setCustomer(customer);
+		accountDAO.saveAccount(account);
+		account.addObserver(emailSender);
+
+		return account;
+	}
+	//String accountNumber, AccountType accountType, AccountClass accountClass
+	public Account createCompanyAccount(String accountNumber, String name, AccountType accountType, String street,
+										String city, String state, String zip, String email, int numEmployees, AccountClass accountclass) {
+
+		Account account = new Account(accountNumber, accountType, AccountClass.COMPANY);
+		Address address = new Address(street, city, state, zip);
+		Customer customer = new Customer(name, email, address);
+
+		account.setCustomer(customer);
+		accountDAO.saveAccount(account);
+		account.addObserver(emailSender);
+
+		return account;
+	}
+
 	private void addObservers(Account account, Observer arrayObs[]) {
 		if(arrayObs == null) return;
 		for (Observer obs : arrayObs) {
