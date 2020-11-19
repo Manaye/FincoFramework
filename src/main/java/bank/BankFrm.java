@@ -1,4 +1,4 @@
-pdepackage bank;
+package bank;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -254,12 +254,13 @@ public class BankFrm extends javax.swing.JFrame {
 			rowdata[0] = account.getAccountNumber();
 			rowdata[1] = account.getCustomer().getName();
 			rowdata[2] = account.getCustomer().getAddress().getCity();
-			rowdata[3] = account.getAccountClass()==AccountClass.COMPANY?"C":"P";
+			rowdata[3] = account.getAccountClass() == AccountClass.COMPANY ? "C" : "P";
 			rowdata[4] = account.getAccountType();
 			rowdata[5] = account.getBalance();
 			model.addRow(rowdata);
-		}​​​​​​​
+		}
 	}
+	
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event) {
 		// get selected name
@@ -277,7 +278,8 @@ public class BankFrm extends javax.swing.JFrame {
 			String samount = (String) model.getValueAt(selection, 5);
 			long currentamount = Long.parseLong(samount);
 			long newamount = currentamount + deposit;
-			//model.setValueAt(String.valueOf((accountService.getAccount(accnr).getBalance())), selection, 5);
+			// model.setValueAt(String.valueOf((accountService.getAccount(accnr).getBalance())),
+			// selection, 5);
 			model.setValueAt(String.valueOf(newamount), selection, 5);
 
 		}
@@ -306,26 +308,28 @@ public class BankFrm extends javax.swing.JFrame {
 						" Account " + accnr + " : balance is negative: $" + String.valueOf(newamount) + " !",
 						"Warning: negative balance", JOptionPane.WARNING_MESSAGE);
 			}
-			//model.setValueAt(String.valueOf((accountService.getAccount(accnr).getBalance())), selection, 5);
+			// model.setValueAt(String.valueOf((accountService.getAccount(accnr).getBalance())),
+			// selection, 5);
 			model.setValueAt(String.valueOf(newamount), selection, 5);
 
 		}
-		
+
 	}
 
 	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event) {
 		JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts",
 				"Add interest to all accounts", JOptionPane.WARNING_MESSAGE);
-		
+
 		for (Account account : AccountDB.accountlist) {
-            System.out.println(account.getAccountNumber() + " " + account.getAccountClass());
-        }
-        for (Account account : AccountDB.accountlist) {
-            if (account.getAccountClass() == AccountClass.COMPANY || account.getAccountClass() == AccountClass.PERSONAL) {
-                accountService.addInterest(account.getAccountNumber());
-            }
-        }
-         loadData();
+			System.out.println(account.getAccountNumber() + " " + account.getAccountClass());
+		}
+		for (Account account : AccountDB.accountlist) {
+			if (account.getAccountClass() == AccountClass.COMPANY
+					|| account.getAccountClass() == AccountClass.PERSONAL) {
+				accountService.addInterest(account.getAccountNumber());
+			}
+		}
+		loadData();
 
 	}
 }
