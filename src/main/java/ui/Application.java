@@ -17,8 +17,9 @@ public class Application {
 
 		accountService.deposit("1263862", 240);
 		accountService.deposit("1263862", 529);
-//		accountService.withdraw("1263862", 230);
+		accountService.withdraw("1263862", 230);
 		accountService.withdraw("1263862", 450);
+		
 
 		// use account 2;
 		accountService.deposit("4253892", 12450);
