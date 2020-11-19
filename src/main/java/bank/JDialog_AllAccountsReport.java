@@ -8,9 +8,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable; 
 import javax.swing.table.DefaultTableModel;
 
-import controller.AccountService;
-import model.Account;
-import model.AccountEntry;
+import framework.Account;
+import framework.AccountEntry;
+import framework.AccountService;
+
  
 public class JDialog_AllAccountsReport { 
 
@@ -44,7 +45,8 @@ public class JDialog_AllAccountsReport {
             	    for(AccountEntry entry : acc.getEntryList()) {
             	    	model.addRow(new String[] {
             	    			entry.getDescription(),
-            	    			String.valueOf(entry.getAmount())});
+            	    			String.valueOf(entry.getAmount()),
+            	    			entry.getTransactionDate()});
             	    			
             	    }
             	    

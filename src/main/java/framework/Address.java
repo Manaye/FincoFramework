@@ -1,4 +1,4 @@
-package model;
+package framework;
 
 public class Address {
     private String street;
@@ -44,4 +44,14 @@ public class Address {
     public void setZip(String zip) {
         this.zip = zip;
     }
+    @Override
+	public String toString() {
+    	StringBuffer sb =  new StringBuffer();
+		sb.append( "Address " + "\n");
+		sb.append("street=" + street);
+		sb.append("city=" + city);
+		sb.append(", state=" + state );
+		sb.append(", zip=" + zip );
+		return sb.toString();
+	}
 }

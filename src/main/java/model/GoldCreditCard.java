@@ -1,8 +1,9 @@
 package model;
 
-import interest_strategy.CCGoldMonthlyInterest;
-
 import java.time.LocalDate;
+
+import framework.AccountClass;
+import framework.CCGoldMonthlyInterest;
 
 public class GoldCreditCard extends CreditCard {
 

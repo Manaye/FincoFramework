@@ -1,8 +1,9 @@
 package model;
 
-import interest_strategy.CCBronzeMonthlyInterest;
-
 import java.time.LocalDate;
+
+import framework.AccountClass;
+import framework.CCBronzeMonthlyInterest;
 
 public class BronzeCreditCard extends CreditCard {
 

@@ -1,7 +1,7 @@
 package bank;
 
-import controller.AccountService;
-import controller.AccountServiceImpl;
+import framework.AccountService;
+import framework.AccountServiceImpl;
 
 public class JDialog_Deposit extends javax.swing.JDialog
 {

@@ -10,13 +10,13 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-import controller.AccountService;
-import controller.AccountServiceImpl;
-import dao.AccountDAO;
-import dao.AccountDAOImpl;
-import dao.AccountDB;
-import model.Account;
-import model.AccountClass;
+import framework.Account;
+import framework.AccountClass;
+import framework.AccountDAO;
+import framework.AccountDAOImpl;
+import framework.AccountService;
+import framework.AccountServiceImpl;
+
 import model.CreditCard;
 import model.CreditCardType;
 
@@ -251,7 +251,7 @@ public class CardFrm extends javax.swing.JFrame
 
 	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		JDialogGenBill billFrm = new JDialogGenBill();
+		JDialogGenBill billFrm = new JDialogGenBill(thisframe);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
 	    

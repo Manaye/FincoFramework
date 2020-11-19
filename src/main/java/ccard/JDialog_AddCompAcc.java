@@ -1,9 +1,8 @@
 package ccard;
 
 import bank.BankFrm;
-import controller.AccountService;
-import model.AccountClass;
-import model.AccountType;
+import framework.AccountService;
+
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {

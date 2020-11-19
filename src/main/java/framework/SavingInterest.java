@@ -1,4 +1,4 @@
-package interest_strategy;
+package framework;
 
 public class SavingInterest implements InterestStrategy {
 

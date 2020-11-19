@@ -1,9 +1,10 @@
 package bank;
 
-import controller.AccountService;
-import controller.AccountServiceImpl;
-import model.AccountClass;
-import model.AccountType;
+import framework.AccountClass;
+import framework.AccountService;
+import framework.AccountServiceImpl;
+import framework.AccountType;
+
 
 public class JDialog_AddCompAcc extends javax.swing.JDialog
 {
@@ -167,7 +168,8 @@ public class JDialog_AddCompAcc extends javax.swing.JDialog
 			      
 		       }
 		       parentframe.newaccount=true;
-			   accountService.createCompanyAccount(accNum,clientName,accountType,street,city,state,zip,email,numEmployee,AccountClass.COMPANY);
+			   accountService.createCompanyAccount(accNum,clientName,accountType,street,city,state,zip,email,numEmployee,
+					   AccountClass.COMPANY);
 			   dispose();
 			 
 	}

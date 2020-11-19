@@ -1,6 +1,6 @@
 package bank;
 
-import controller.AccountService;
+import framework.AccountService;
 
 public class JDialog_Withdraw extends javax.swing.JDialog
 {

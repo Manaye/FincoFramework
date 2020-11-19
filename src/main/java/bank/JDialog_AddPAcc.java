@@ -2,9 +2,10 @@ package bank;
 
 import java.time.LocalDate;
 
-import controller.AccountService;
-import model.AccountClass;
-import model.AccountType;
+import framework.AccountClass;
+import framework.AccountService;
+import framework.AccountType;
+
 
 /*
 		A basic implementation of the JDialog class.
@@ -203,11 +204,14 @@ public class JDialog_AddPAcc extends javax.swing.JDialog
 	           accountType = AccountType.SAVING;
 	       }
 	       parentframe.newaccount=true;
-	       LocalDate dateOfBirth = LocalDate.parse(birthdate);
+	       LocalDate dateOfBirth = LocalDate.now();
 		   accountService.createPersonalAccount(accountNum,clientName, accountType, street, 
-					city, state, zip, email,dateOfBirth, AccountClass.PERSONAL);
+					city, state, zip, email, dateOfBirth,AccountClass.PERSONAL);
 	       dispose();
 		}
+	//String accountNumber, String name, AccountType accountType, String street,
+	// String city, String state, String zip, String email, LocalDate birthdate,
+	//AccountClass accountclass
 
 	void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event)
 	{

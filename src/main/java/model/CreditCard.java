@@ -2,6 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
+import framework.Account;
+import framework.AccountClass;
+
 public class CreditCard extends Account {
     private String creditCardNumber;
     private LocalDate expireDate;

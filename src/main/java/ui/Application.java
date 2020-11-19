@@ -1,10 +1,15 @@
 package ui;
 
-import controller.AccountService;
-import controller.AccountServiceImpl;
 import model.*;
 
 import java.time.LocalDate;
+
+import framework.Account;
+import framework.AccountClass;
+import framework.AccountEntry;
+import framework.AccountService;
+import framework.AccountServiceImpl;
+import framework.Customer;
 
 public class Application {
 	public static void main(String[] args) {

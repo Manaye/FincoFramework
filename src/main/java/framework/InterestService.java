@@ -1,4 +1,4 @@
-package interest_strategy;
+package framework;
 
 public interface InterestService {
     double getMonthlyInterest();

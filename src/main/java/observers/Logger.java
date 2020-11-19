@@ -4,8 +4,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Logger implements Observer {
-    @Override
-    public void update(Observable o, Object arg) {
-        System.out.println("Log an update: " + o.toString());
-    }
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		System.out.println("Log an Update: " + o.toString() );
+	}
+
 }

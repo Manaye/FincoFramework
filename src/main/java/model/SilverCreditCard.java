@@ -1,8 +1,9 @@
 package model;
 
-import interest_strategy.CCSilverMonthlyInterest;
-
 import java.time.LocalDate;
+
+import framework.AccountClass;
+import framework.CCSilverMonthlyInterest;
 
 public class SilverCreditCard extends CreditCard  {
 

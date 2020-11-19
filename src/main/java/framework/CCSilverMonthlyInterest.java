@@ -1,4 +1,4 @@
-package interest_strategy;
+package framework;
 
 public class CCSilverMonthlyInterest implements InterestService {
     private double monthlyInterest = 0.08;

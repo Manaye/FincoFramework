@@ -9,11 +9,15 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import framework.Account;
+import framework.AccountEntry;
+import framework.Customer;
+
 public class BillingReport {
-    private Collection<CreditCard> creditCaredAccount;
+    private Collection<Account> creditCaredAccount;
     private LocalDate previousMonth ;
 
-    public BillingReport(Collection<CreditCard> accounts) {
+    public BillingReport(Collection<Account> accounts) {
         this.creditCaredAccount=accounts;
         getPrevious();
     }
@@ -33,10 +37,11 @@ public class BillingReport {
 
     }
 
-    public List<String> getBillingReport(){
-        List<String>reports = new ArrayList<>();
-        for(CreditCard creditCard :creditCaredAccount) {
-            String report;
+    public String getBillingReport(){
+        //List<String>reports = new ArrayList<>();
+        String report = "";
+        for(Account creditCard :creditCaredAccount) {
+            
             Collection<AccountEntry> acountentrylist= creditCard.getEntryList();
             double previousBalance= calpreviousBalance(creditCard);
             double totalCreadits =  calTotal("paid",acountentrylist);
@@ -49,13 +54,13 @@ public class BillingReport {
                     "creditcared"+creditCard.getAccountNumber()+"type"+
                     creditCard.getAccountType()+"\n"+"previous"+ previousBalance+"\n total creadit "+totalCreadits+"\n"+"newBlance"+newBalance+"\n"+"totalDue"+totalDue;
 
-            System.out.println("report");
-            reports.add(report);
+           // System.out.println("report");
+            //reports.add(report);
         }
-        return reports;
+        return report;
     }
 
-    private double calpreviousBalance(CreditCard creditCard) {
+    private double calpreviousBalance(Account creditCard) {
         double previousBalance = creditCard.getBalance();
         Collection<AccountEntry> acountentrylist = creditCard.getEntryList();
 
@@ -67,7 +72,7 @@ public class BillingReport {
         return previousBalance;
     }
 
-    private double calTotalCharge(CreditCard creditCard) {
+    private double calTotalCharge(Account creditCard) {
         double totalCharge;
         Collection<AccountEntry> acountentrylist = creditCard.getEntryList();
 
@@ -81,14 +86,14 @@ public class BillingReport {
         return totalCharge;
     }
 
-    public double calNewBlance(CreditCard creditCard, double previousBalance, double totalCreadit, double totalCharges) {
+    public double calNewBlance(Account creditCard, double previousBalance, double totalCreadit, double totalCharges) {
 //      //formula:  new balance = previous balance – total credits + total charges + MI * (previous balance – total credits)
         double newBalance = previousBalance - totalCreadit + totalCharges
                             + creditCard.getMonthlyInterest()*(previousBalance -totalCreadit);
         return newBalance;
     }
 
-    private double calTotalDue(CreditCard creditCard, double newBalance) {
+    private double calTotalDue(Account creditCard, double newBalance) {
         //formula: MP * new balance
         double totalDue = creditCard.getMinimumPayInterest()*newBalance;
         return totalDue;

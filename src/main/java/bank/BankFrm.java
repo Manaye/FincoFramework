@@ -5,14 +5,13 @@ import java.time.LocalDate;
 
 import javax.swing.table.DefaultTableModel;
 
-import controller.AccountService;
-import controller.AccountServiceImpl;
-import dao.AccountDAO;
-import dao.AccountDAOImpl;
-import dao.AccountDB;
-import model.Account;
-import model.AccountClass;
-import model.AccountType;
+import framework.Account;
+import framework.AccountClass;
+import framework.AccountDAO;
+import framework.AccountDAOImpl;
+import framework.AccountService;
+import framework.AccountServiceImpl;
+import framework.AccountType;
 
 import javax.swing.*;
 
@@ -323,10 +322,10 @@ public class BankFrm extends javax.swing.JFrame {
 			wd.show();
 
 			// compute new amount
-			long deposit = Long.parseLong(amountDeposit);
+			double deposit = Double.parseDouble(amountDeposit);
 			String samount = (String) model.getValueAt(selection, 5);
-			long currentamount = Long.parseLong(samount);
-			long newamount = currentamount - deposit;
+			double currentamount = Double.parseDouble(samount);
+			double newamount = currentamount - deposit;
 			model.setValueAt(String.valueOf(newamount), selection, 5);
 			if (newamount < 0) {
 				JOptionPane.showMessageDialog(JButton_Withdraw,

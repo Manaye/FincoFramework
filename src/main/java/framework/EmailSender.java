@@ -1,7 +1,7 @@
-package observers;
+package framework;
 
-import model.Account;
-import model.AccountEntry;
+
+
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
