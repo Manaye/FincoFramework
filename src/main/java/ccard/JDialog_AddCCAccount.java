@@ -92,7 +92,7 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 		getContentPane().add(JTextField_Email);
 		JTextField_Email.setBounds(84,228,156,20);
 		//}}
-	
+
 		//{{REGISTER_LISTENERS
 		SymMouse aSymMouse = new SymMouse();
 		JRadioButton_Gold.addMouseListener(aSymMouse);

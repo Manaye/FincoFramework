@@ -266,7 +266,7 @@ public class CardFrm extends javax.swing.JFrame
 		    model.setValueAt(String.valueOf(newamount),selection, 4);
 		}
 		
-		
+
 	}
 
 	void JButtonWithdraw_actionPerformed(java.awt.event.ActionEvent event)

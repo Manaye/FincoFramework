@@ -18,7 +18,6 @@ public class JDialog_Withdraw extends javax.swing.JDialog
 		// the components. To modify the code, only use code syntax that matches
 		// what Visual Cafe can generate, or Visual Cafe may be unable to back
 		// parse your Java file into its visual environment.
-
 		setTitle("Charge Account");
 		setModal(true);
 		getContentPane().setLayout(null);

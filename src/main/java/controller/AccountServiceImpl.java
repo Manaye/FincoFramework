@@ -44,11 +44,9 @@ public class AccountServiceImpl implements AccountService {
 		default:
 			account = new BronzeCreditCard(accountNumber, creditCardNumber, expiredDate, accountclass);
 		}
-
 		Address address = new Address(street, city, state, zip);
 		Customer customer = new Customer(customerName, email, address);
 		account.setCustomer(customer);
-
 		// Add Email observer
 		account.addObserver(emailSender);
 

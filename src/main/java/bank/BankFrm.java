@@ -1,4 +1,4 @@
-package bank;
+pdepackage bank;
 
 import java.awt.*;
 import java.time.LocalDate;
@@ -259,7 +259,6 @@ public class BankFrm extends javax.swing.JFrame {
 			rowdata[5] = account.getBalance();
 			model.addRow(rowdata);
 		}​​​​​​​
-		
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event) {
@@ -326,7 +325,7 @@ public class BankFrm extends javax.swing.JFrame {
                 accountService.addInterest(account.getAccountNumber());
             }
         }
-        loadData();
+         loadData();
 
 	}
 }
