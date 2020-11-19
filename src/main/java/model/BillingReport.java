@@ -38,16 +38,16 @@ public class BillingReport {
         for(CreditCard creditCard :creditCaredAccount) {
             String report;
             Collection<AccountEntry> acountentrylist= creditCard.getEntryList();
-            double previousBalance= calpreviousBalance(creditCard ,acountentrylist);
+            double previousBalance= calpreviousBalance(creditCard);
             double totalCreadits =  calTotal("paid",acountentrylist);
-            double totalCharges = calTotalCharge("carge,acountentrylist");
-            double newBalance = calNewBlance(previousBalance,totalCreadits,totalCharges,CreditCard);
+            double totalCharges = calTotalCharge(creditCard);
+            double newBalance = calNewBlance(creditCard,previousBalance,totalCreadits,totalCharges);
             double totalDue = calTotalDue(creditCard,newBalance);
             System.out.println("Billing");
             Customer customer =  creditCard.getCustomer();
             report = "Name"+customer.getName()+"address"+customer.getAddress().toString()+
                     "creditcared"+creditCard.getAccountNumber()+"type"+
-                    creditCard.getAccountType()+"\n"+"previous"+ previousBalance+"\n total creadit "+totalCreadits+"\n"+"newBlance"+newBlance+"\n"+"totalDue"+totalDue;
+                    creditCard.getAccountType()+"\n"+"previous"+ previousBalance+"\n total creadit "+totalCreadits+"\n"+"newBlance"+newBalance+"\n"+"totalDue"+totalDue;
 
             System.out.println("report");
             reports.add(report);

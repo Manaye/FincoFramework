@@ -30,8 +30,9 @@ public interface AccountService {
 	// void transferFunds(String fromAccountNumber, String toAccountNumber, double
 	// amount, String description);
 	void addInterest(String accountNumber);
+	void addInterest();
 
-	void getBillingReport(); // TODO
+	String getBillingReport(); // TODO
 	
 
 }
