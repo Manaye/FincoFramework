@@ -7,6 +7,7 @@ import java.util.*;
 
 import framework.InterestService;
 import framework.InterestStrategy;
+import observers.Logger;
 
 
 public class Account extends Observable {
@@ -21,21 +22,26 @@ public class Account extends Observable {
 	
 	
 	
+	
 	//bank account contractor
 	public Account(String accountNumber, AccountType accountType, AccountClass accountClass) {
 	    this.accountNumber = accountNumber;
 	    this.accountType = accountType;
 	    this.accountClass = accountClass;
 	   
+	   
 	}
 	//credit card contractor
 	public Account(String accountNumber, AccountClass accountClass) {
 		this.accountNumber = accountNumber;
 		this.accountClass = accountClass;
+		
 	}
 	public Account() {
+		
 		// TODO Auto-generated constructor stub
 	}
+	
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -72,6 +78,7 @@ public class Account extends Observable {
 		System.out.println("amount" + amount);
 		AccountEntry entry = new AccountEntry(LocalDate.now(),amount, "deposit", "", "");
 		entryList.add(entry);
+		System.out.println("Deposited " + amount);
 
 		if(amount > 400) {
 			this.notifyChanged(entry);
@@ -81,6 +88,7 @@ public class Account extends Observable {
 	public void withdraw(double amount) {
 		AccountEntry entry = new AccountEntry(LocalDate.now(),-amount, "withdraw", "", "");
 		entryList.add(entry);
+		System.out.println("Withdrawn " + amount);
 
 		if(amount > 400) {
 			this.notifyChanged(entry);

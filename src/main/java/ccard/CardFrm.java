@@ -106,6 +106,8 @@ public class CardFrm extends javax.swing.JFrame
 		
 	}
 	void loader() {
+		
+	
 		for(Account account : AccountDAOImpl.accountlist) {
 			if (account instanceof CreditCard) {
 				CreditCard creditcard = (CreditCard) account;
@@ -176,7 +178,7 @@ public class CardFrm extends javax.swing.JFrame
 				BankFrm_windowClosing(event);
 		}
 	}
-
+      //handle event
 	void BankFrm_windowClosing(java.awt.event.WindowEvent event)
 	{
 		// to do: code goes here.
@@ -258,7 +260,7 @@ public class CardFrm extends javax.swing.JFrame
 	}
 
 	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
-	{
+	{	
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >=0){
@@ -275,7 +277,9 @@ public class CardFrm extends javax.swing.JFrame
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
 		    model.setValueAt(String.valueOf(newamount),selection, 4);
+		    accountService.deposit((String)model.getValueAt(selection, 1), deposit);
 		}
+      
 		
 
 	}
@@ -301,6 +305,7 @@ public class CardFrm extends javax.swing.JFrame
 		    if (newamount <0){
 		       JOptionPane.showMessageDialog(JButton_Withdraw, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
 		    }
+		    accountService.withdraw((String)model.getValueAt(selection, 1), deposit);
 		}
 	}
 }
