@@ -276,8 +276,11 @@ public class CardFrm extends javax.swing.JFrame
             String samount = (String)model.getValueAt(selection, 4);
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
+		    //Actually calls the deposit method
 		    accountService.deposit((String)model.getValueAt(selection, 1), deposit);
+		    //Updates the UI value
+		    model.setValueAt(String.valueOf(newamount),selection, 4);
+		   
 		}
       
 		

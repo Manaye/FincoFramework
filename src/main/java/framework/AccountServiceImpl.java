@@ -18,18 +18,19 @@ import framework.SavingInterest;
 
 public class AccountServiceImpl implements AccountService {
 	private AccountDAO accountDAO;
-	private Observer emailSender = new EmailSender();
-	private Observer[] arrayAccountChangeObservers;
-	 InterestStrategy checkingInterest = new CheckingInterest();
-	 InterestStrategy savingInterest = new SavingInterest();
+	//private Observer emailSender = new EmailSender();
+	//private Observer[] arrayAccountChangeObservers;
+	InterestStrategy checkingInterest = new CheckingInterest();
+	InterestStrategy savingInterest = new SavingInterest();
 
     private static AccountServiceImpl instance = new AccountServiceImpl();
 
 	private AccountServiceImpl() {
 		accountDAO = new AccountDAOImpl();
-
-		arrayAccountChangeObservers = new Observer[] { new SMSSender(), new Logger() };
+		//arrayAccountChangeObservers = new Observer[] {emailSender , new SMSSender(), new Logger() };
+		
 	}
+	
 	public static AccountService getInstance() {
 		return instance;
 	}
@@ -53,8 +54,8 @@ public class AccountServiceImpl implements AccountService {
 		account.setCustomer(customer);
 
 
-		//Add Email observer
-		account.addObserver(emailSender);
+//		//Add Email observer
+//		account.addObserver(emailSender);
 
 		accountDAO.saveAccount(account);
 		return account;
@@ -75,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
 		}
 		account.setCustomer(customer);
 		accountDAO.saveAccount(account);
-		account.addObserver(emailSender);
+		//account.addObserver(emailSender);
 
 		return account;
 	}
@@ -94,7 +95,7 @@ public class AccountServiceImpl implements AccountService {
 		}
 		account.setCustomer(customer);
 		accountDAO.saveAccount(account);
-		account.addObserver(emailSender);
+		//account.addObserver(emailSender);
 
 		return account;
 	}

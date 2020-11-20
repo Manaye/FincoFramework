@@ -8,6 +8,7 @@ import java.util.*;
 import framework.InterestService;
 import framework.InterestStrategy;
 import observers.Logger;
+import observers.SMSSender;
 
 
 public class Account extends Observable {
@@ -28,18 +29,28 @@ public class Account extends Observable {
 	    this.accountNumber = accountNumber;
 	    this.accountType = accountType;
 	    this.accountClass = accountClass;
-	   
+	    addObservers();
 	   
 	}
 	//credit card contractor
 	public Account(String accountNumber, AccountClass accountClass) {
 		this.accountNumber = accountNumber;
 		this.accountClass = accountClass;
+		addObservers();
 		
 	}
 	public Account() {
-		
+		addObservers();
 		// TODO Auto-generated constructor stub
+	}
+	
+	private void addObservers() {
+	
+		Observer[] observers = 
+				new Observer[] {new EmailSender() , new SMSSender(), new Logger() };
+		for (Observer obs : observers) {
+			this.addObserver(obs);
+		}
 	}
 	
 	public String getAccountNumber() {
